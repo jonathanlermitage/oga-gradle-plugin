@@ -1,0 +1,34 @@
+install {
+    repositories.mavenInstaller {
+        pom.whenConfigured { generatedPom ->
+            generatedPom.dependencies.removeAll { it.scope == 'test' }
+            generatedPom.project {
+                name = 'OGA gradle plugin'
+                description = 'A Gradle plugin that checks for deprecated groupId + artifactId couples'
+                url = 'https://github.com/spring-gradle-plugins/dependency-management-plugin'
+                organization {
+                    name = 'Jonathan Lermitage'
+                    url = 'https://github.com/jonathanlermitage'
+                }
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url = 'https://raw.githubusercontent.com/jonathanlermitage/oga-maven-plugin/master/LICENSE.txt'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/jonathanlermitage/oga-maven-plugin'
+                    connection = 'scm:git:https://github.com/jonathanlermitage/oga-maven-plugin'
+                }
+                developers {
+                    developer {
+                        id = 'jonathanlermitage'
+                        name = 'Jonathan Lermitage'
+                        email = 'jonathan.lermitage@gmail.com'
+                        roles = ["Project lead"]
+                    }
+                }
+            }
+        }
+    }
+}

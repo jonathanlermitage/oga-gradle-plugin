@@ -1,0 +1,80 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'idea'
+    id 'java'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.10.1' // https://plugins.gradle.org/plugin/com.gradle.plugin-publish
+}
+
+group = 'biz.lermitage.oga'
+version = '1.0.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+pluginBundle {
+    website = 'https://github.com/jonathanlermitage/oga-gradle-plugin'
+    vcsUrl = 'https://github.com/jonathanlermitage/oga-gradle-plugin.git'
+    tags = ['dependency-analysis']
+}
+
+gradlePlugin {
+    plugins {
+        ogaCheckPlugin {
+            id = 'biz.lermitage.oga'
+            displayName = 'Plugin that checks for deprecated groupId+artifactId'
+            description = 'Old GroupIds Alerter - A Gradle plugin that checks for deprecated groupId+artifactId (e.g. did you know that graphql-spring-boot-starter moved from com.graphql-java to com.graphql-java-kickstart?).'
+            implementationClass = 'biz.lermitage.oga.OgaCheckPlugin'
+        }
+    }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    testImplementation gradleTestKit()
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'commons-io:commons-io:2.6'
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(Test) {
+    maxParallelForks = (int) (Runtime.runtime.availableProcessors().intdiv(2) ?: 1)
+}
+
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
+
+//<editor-fold desc="Write the plugin's classpath to a file to share with the tests">
+task createClasspathManifest {
+    def outputDir = file("$buildDir/$name")
+
+    inputs.files sourceSets.main.runtimeClasspath
+    outputs.dir outputDir
+
+    doLast {
+        outputDir.mkdirs()
+        file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
+    }
+}
+dependencies {
+    testRuntimeOnly files(createClasspathManifest)
+}
+//</editor-fold>
