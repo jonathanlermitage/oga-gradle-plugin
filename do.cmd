@@ -16,7 +16,7 @@ if [%1] == [fixgit] (
   git update-index --chmod=+x gradlew
 )
 if [%1] == [b] (
-  gradlew clean build --warning-mode all --info --parallel --scan
+  gradlew clean build -x test --warning-mode all --info --parallel --scan
 )
 if [%1] == [t] (
   gradlew build testClasses check --warning-mode all --info --parallel --scan
