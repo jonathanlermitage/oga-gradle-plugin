@@ -8,6 +8,7 @@ plugins {
     id 'idea'
     id 'java'
     id 'java-gradle-plugin'
+    id 'com.gradle.build-scan' version '2.3' // https://plugins.gradle.org/plugin/com.gradle.build-scan
     id 'com.gradle.plugin-publish' version '0.10.1' // https://plugins.gradle.org/plugin/com.gradle.plugin-publish
 }
 
