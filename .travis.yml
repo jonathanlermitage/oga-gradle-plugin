@@ -13,7 +13,7 @@ before_install: chmod +x gradlew
 
 install: skip # "gradlew assemble" is not needed, so skip this phase
 
-script: ./gradlew clean build check --warning-mode all --info --full-stacktrace --scan
+script: ./gradlew clean build check --warning-mode all --info --full-stacktrace --parallel --scan
 
 git:
   depth: 3

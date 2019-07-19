@@ -55,7 +55,7 @@ repositories {
 }
 
 tasks.withType(Test) {
-    maxParallelForks = (int) (Runtime.runtime.availableProcessors().intdiv(2) ?: 1)
+    maxParallelForks = 1 + (Runtime.runtime.availableProcessors().intdiv(2) ?: 1)
 }
 
 buildScan {
