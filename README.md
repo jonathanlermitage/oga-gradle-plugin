@@ -53,7 +53,7 @@ See [plugins.gradle.org/plugin/biz.lermitage.oga](https://plugins.gradle.org/plu
 
 ## Build
 
-`./gradlew build --scan`
+`./gradlew build`
 
 ## Contribution
 
