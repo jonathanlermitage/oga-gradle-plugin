@@ -45,7 +45,7 @@ buildscript {
 apply plugin: "biz.lermitage.oga"
 ```
 
-Then launch `./gradlew biz-lermitage-oga-gradle-check`. If any deprecated *groupId + artifactId* couple is found, error message(s) will be displayed and a the Gradle build will fail.
+Then launch `./gradlew biz-lermitage-oga-gradle-check`. If any deprecated *groupId + artifactId* couple is found, error message(s) will be displayed and the Gradle build will fail.
 
 See [plugins.gradle.org/plugin/biz.lermitage.oga](https://plugins.gradle.org/plugin/biz.lermitage.oga) for details.
 
