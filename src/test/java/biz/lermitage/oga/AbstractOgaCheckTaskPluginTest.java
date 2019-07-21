@@ -127,14 +127,14 @@ public abstract class AbstractOgaCheckTaskPluginTest {
             .withArguments("biz-lermitage-oga-gradle-check", "--info", "--stacktrace")
             .withPluginClasspath(getPluginClasspathFiles())
             .withGradleVersion(gradleVersion)
-            .build();
+            .buildAndFail();
         
         assertTrue(result.getOutput().contains("'bouncycastle' groupId should be replaced by 'org.bouncycastle'"));
         assertTrue(result.getOutput().contains("'com.graphql-java:graphql-spring-boot-starter' should be replaced by 'com.graphql-java-kickstart:graphql-spring-boot-starter'"));
         
         BuildTask task = result.task(":biz-lermitage-oga-gradle-check");
         assertNotNull(task);
-        assertEquals(TaskOutcome.SUCCESS, task.getOutcome());
+        assertEquals(TaskOutcome.FAILED, task.getOutcome());
     }
     
     private void writeFile(File destination, String content) throws IOException {

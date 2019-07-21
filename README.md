@@ -24,7 +24,7 @@ Using the plugins DSL:
 
 ```groovy
 plugins {
-  id "biz.lermitage.oga" version "1.0.0"
+  id "biz.lermitage.oga" version "1.1.0"
 }
 ```
 

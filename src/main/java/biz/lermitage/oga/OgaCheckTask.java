@@ -28,12 +28,12 @@ public class OgaCheckTask extends DefaultTask {
     void doCheck() throws IOException {
         // load black-list
         Definitions definitions = IOTools.readDefinitionsFromUrl(new URL(DEFINITIONS_URL));
-        project.getLogger().debug("Loaded definitions file version: " + definitions.getVersion() + ", " + definitions.getDate());
+        debug("Loaded definitions file version: " + definitions.getVersion() + ", " + definitions.getDate());
         
         // read project's dependencies
         Set<String> dependencies = new HashSet<>();
-        project.getLogger().info("Old GroupId Alerter - " + GITHUB_ISSUES_URL);
-        project.getLogger().info("Checking dependencies on project '" + project.getName() + ":" + project.getVersion() + "'");
+        info("Old GroupId Alerter - " + GITHUB_ISSUES_URL);
+        info("Checking dependencies on project '" + project.getName() + ":" + project.getVersion() + "'");
         for (Configuration config : project.getConfigurations().toArray(new Configuration[0])) {
             project.getConfigurations().getByName(config.getName()).getAllDependencies().forEach(dep -> {
                 if (dep.getGroup() != null && !dep.getName().equals("unspecified")) {
@@ -51,23 +51,35 @@ public class OgaCheckTask extends DefaultTask {
                 if (mig.isGroupIdOnly()) {
                     if (groupdId.equals(mig.getOldGroupId())) {
                         String msg = "'" + groupdId + "' groupId should be replaced by '" + mig.getNewerGroupId() + "'";
-                        project.getLogger().error(msg);
+                        error("" + msg);
                         deprecatedDependencies.add(dep);
                     }
                 } else {
                     if (groupdId.equals(mig.getOldGroupId()) && artifactId.equals(mig.getOldArtifactId())) {
                         String msg = "'" + groupdId + ":" + artifactId + "' should be replaced by '" + mig.getNewerGroupId() + ":" + mig.getNewerArtifactId() + "'";
-                        project.getLogger().error(msg);
+                        error(msg);
                         deprecatedDependencies.add(dep);
                     }
                 }
             })
         );
         if (deprecatedDependencies.isEmpty()) {
-            project.getLogger().info("No problem detected. Good job! :-)");
+            info("No problem detected. Good job! :-)");
         } else {
-            project.getLogger().error("Project has old dependencies; see warning/error messages");
-            //throw new GradleException("Project has old dependencies; see warning/error messages");
+            error("Project has old dependencies; see warning/error messages");
+            throw new IllegalStateException("Project has old dependencies; see warning/error messages");
         }
+    }
+    
+    private void debug(String msg) {
+        project.getLogger().debug(msg);
+    }
+    
+    private void info(String msg) {
+        project.getLogger().info(msg);
+    }
+    
+    private void error(String msg) {
+        project.getLogger().error("[ERROR] " + msg);
     }
 }
