@@ -38,7 +38,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.biz.lermitage.oga:oga-gradle-plugin:1.0.0"
+    classpath "gradle.plugin.biz.lermitage.oga:oga-gradle-plugin:1.1.0"
   }
 }
 
