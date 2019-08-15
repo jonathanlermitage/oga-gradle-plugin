@@ -11,7 +11,7 @@
 
 A Gradle plugin that checks for deprecated *groupId + artifactId* couples, in order to reduce usage of non-maintained 3rd-party code (e.g. did you know that artifact `graphql-spring-boot-starter` moved from `from com.graphql-java` to `com.graphql-java-kickstart`?).
 
-Tested with Gradle 4.10.3 and 5.5.1 on JDK8 and JDK11.
+Tested with Gradle 4.10.3 and 5.6 on JDK8 and JDK11.
 
 ## Author
 

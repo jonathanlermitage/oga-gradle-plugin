@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 public abstract class AbstractOgaCheckTaskPluginTest {
     
     protected static final String GRADLE_4_VERSION = "4.10.3";
-    protected static final String GRADLE_5_VERSION = "5.5.1";
+    protected static final String GRADLE_5_VERSION = "5.6";
     
     @Rule
     public final TemporaryFolder testProjectDir = new TemporaryFolder();
