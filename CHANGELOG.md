@@ -3,6 +3,7 @@
 ### TODO, ideas, ideal for contribution
 * improve tests.
 * make plugin configurable.
+* see [gradle](https://github.com/jonathanlermitage/oga-gradle-plugin/issues) and [maven](https://github.com/jonathanlermitage/oga-maven-plugin/issues) (shared code) plugin issues.
 
 ### 1.1.0 (2019/07/21)
 * internal : use gradle logger.
