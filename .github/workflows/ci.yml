@@ -11,6 +11,6 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.ij }}
+          java-version: ${{ matrix.java-version }}
       - name: Build and verify
         run: ./gradlew clean build check --warning-mode all --info --full-stacktrace --parallel
