@@ -3,7 +3,6 @@
 </h1>
 
 <p align="center">
-    <a href="https://travis-ci.org/jonathanlermitage/oga-gradle-plugin"><img src="https://travis-ci.org/jonathanlermitage/oga-gradle-plugin.svg?branch=master"/></a>
     <a href="https://github.com/jonathanlermitage/oga-gradle-plugin/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/jonathanlermitage/oga-gradle-plugin.svg"/></a>
 </p>
 
