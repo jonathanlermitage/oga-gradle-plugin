@@ -9,18 +9,18 @@ if [%1] == [help] (
 )
 
 if [%1] == [w] (
-  gradle wrapper --gradle-version=%2 --distribution-type all --no-daemon
+  gradle wrapper --gradle-version=%2 --no-daemon
 )
 if [%1] == [fixgit] (
   echo git update-index --chmod=+x gradlew
   git update-index --chmod=+x gradlew
 )
 if [%1] == [b] (
-  gradlew clean build -x test --warning-mode all --info --parallel --scan
+  gradlew clean build -x test --warning-mode all --info --parallel
 )
 if [%1] == [t] (
-  gradlew build testClasses check --warning-mode all --info --parallel --scan
+  gradlew build testClasses check --warning-mode all --info --parallel
 )
 if [%1] == [pub] (
-  gradlew clean build testClasses check publishPlugins --warning-mode all --info --parallel --scan
+  gradlew clean build testClasses check publishPlugins --warning-mode all --info --parallel
 )
