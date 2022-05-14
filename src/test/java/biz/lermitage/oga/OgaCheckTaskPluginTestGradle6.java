@@ -4,20 +4,21 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class OgaCheckTaskPluginTest_Gradle4 extends AbstractOgaCheckTaskPluginTest {
-    
+@SuppressWarnings("NewClassNamingConvention")
+public class OgaCheckTaskPluginTestGradle6 extends AbstractOgaCheckTaskPluginTest {
+
     @Test
     public void testOgaCheckTaskOkSimple() throws IOException {
-        internalTestOgaCheckTaskSimpleOk(GRADLE_4_VERSION);
+        internalTestOgaCheckTaskSimpleOk(GRADLE_6_VERSION);
     }
-    
+
     @Test
     public void testOgaCheckTaskOk() throws IOException {
-        internalTestOgaCheckTaskOk(GRADLE_4_VERSION);
+        internalTestOgaCheckTaskOk(GRADLE_6_VERSION);
     }
-    
+
     @Test
     public void testOgaCheckTaskKo() throws IOException {
-        internalTestOgaCheckTaskKo(GRADLE_4_VERSION);
+        internalTestOgaCheckTaskKo(GRADLE_6_VERSION);
     }
 }

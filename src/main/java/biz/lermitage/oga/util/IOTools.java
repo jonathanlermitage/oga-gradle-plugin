@@ -18,14 +18,14 @@ import java.net.URL;
  */
 @SuppressWarnings("WeakerAccess")
 public class IOTools {
-    
-    private static Gson GSON = new GsonBuilder().create();
-    
+
+    private static final Gson GSON = new GsonBuilder().create();
+
     public static Definitions readDefinitionsFromUrl(URL url) throws IOException {
         String definitionsAsString = readContentFromUrl(url);
         return GSON.fromJson(definitionsAsString, Definitions.class);
     }
-    
+
     public static String readContentFromUrl(URL url) throws IOException {
         StringBuilder content = new StringBuilder();
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

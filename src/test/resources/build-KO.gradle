@@ -1,0 +1,20 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'biz.lermitage.oga'
+}
+
+dependencies {
+    implementation 'bouncycastle:bcprov-jdk15:140'
+    implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
+    testRuntimeOnly 'junit:junit:4.12'
+}
+
+repositories {
+    mavenCentral()
+}

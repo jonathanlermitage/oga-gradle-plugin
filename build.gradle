@@ -8,11 +8,11 @@ plugins {
     id 'idea'
     id 'java'
     id 'java-gradle-plugin'
-    id 'com.gradle.plugin-publish' version '0.18.0' // https://plugins.gradle.org/plugin/com.gradle.plugin-publish
+    id 'com.gradle.plugin-publish' version '0.21.0' // https://plugins.gradle.org/plugin/com.gradle.plugin-publish
 }
 
 group = 'biz.lermitage.oga'
-version = '1.1.1'
+version = '1.2.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -42,10 +42,10 @@ gradlePlugin {
 
 dependencies {
     implementation gradleApi()
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     testImplementation gradleTestKit()
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     testImplementation 'commons-io:commons-io:2.11.0'
 }
 

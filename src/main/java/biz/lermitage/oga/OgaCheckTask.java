@@ -14,25 +14,25 @@ import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 public class OgaCheckTask extends DefaultTask {
-    
+
     private static final String DEFINITIONS_URL = "https://raw.githubusercontent.com/jonathanlermitage/oga-maven-plugin/master/uc/og-definitions.json";
-    private static final String GITHUB_ISSUES_URL = "github.com/jonathanlermitage/oga-gradle-plugin";
-    
+    private static final String PRJ_URL = "github.com/jonathanlermitage/oga-gradle-plugin";
+
     private Project project;
-    
+
     public void setProject(Project project) {
         this.project = project;
     }
-    
+
     @TaskAction
     void doCheck() throws IOException {
         // load black-list
         Definitions definitions = IOTools.readDefinitionsFromUrl(new URL(DEFINITIONS_URL));
         debug("Loaded definitions file version: " + definitions.getVersion() + ", " + definitions.getDate());
-        
+
         // read project's dependencies
         Set<String> dependencies = new HashSet<>();
-        info("Old GroupId Alerter - " + GITHUB_ISSUES_URL);
+        info("Old GroupId Alerter - " + PRJ_URL);
         info("Checking dependencies on project '" + project.getName() + ":" + project.getVersion() + "'");
         for (Configuration config : project.getConfigurations().toArray(new Configuration[0])) {
             project.getConfigurations().getByName(config.getName()).getAllDependencies().forEach(dep -> {
@@ -41,7 +41,7 @@ public class OgaCheckTask extends DefaultTask {
                 }
             });
         }
-        
+
         // compare project dependencies to integrated black-list
         Set<String> deprecatedDependencies = new HashSet<>();
         definitions.getMigration().forEach(mig -> dependencies.forEach(dep -> {
@@ -70,15 +70,15 @@ public class OgaCheckTask extends DefaultTask {
             throw new IllegalStateException("Project has old dependencies; see warning/error messages");
         }
     }
-    
+
     private void debug(String msg) {
         project.getLogger().debug(msg);
     }
-    
+
     private void info(String msg) {
         project.getLogger().info(msg);
     }
-    
+
     private void error(String msg) {
         project.getLogger().error("[ERROR] " + msg);
     }

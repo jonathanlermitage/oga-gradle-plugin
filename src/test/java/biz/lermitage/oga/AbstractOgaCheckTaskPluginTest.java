@@ -15,8 +15,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
@@ -29,7 +32,7 @@ public abstract class AbstractOgaCheckTaskPluginTest {
     protected static final String GRADLE_4_VERSION = "4.10.3";
     protected static final String GRADLE_5_VERSION = "5.6.4";
     protected static final String GRADLE_6_VERSION = "6.9.1";
-    protected static final String GRADLE_7_VERSION = "7.3.1";
+    protected static final String GRADLE_7_VERSION = "7.4.2";
 
     @Rule
     public final TemporaryFolder testProjectDir = new TemporaryFolder();
@@ -38,16 +41,11 @@ public abstract class AbstractOgaCheckTaskPluginTest {
 
     @Before
     public void setup() throws IOException {
-        if (!testProjectDir.getRoot().exists()) {
-            assertTrue(testProjectDir.getRoot().mkdirs());
-        }
         buildFile = testProjectDir.newFile("build.gradle");
     }
 
     protected void internalTestOgaCheckTaskSimpleOk(String gradleVersion) throws IOException {
-        String buildFileContent = "plugins { id 'biz.lermitage.oga' }";
-
-        writeFile(buildFile, buildFileContent);
+        writeFile(buildFile, getFileContentFromResources("build-OK-simple.gradle"));
 
         BuildResult result = GradleRunner.create()
             .withProjectDir(testProjectDir.getRoot())
@@ -64,28 +62,7 @@ public abstract class AbstractOgaCheckTaskPluginTest {
     }
 
     protected void internalTestOgaCheckTaskOk(String gradleVersion) throws IOException {
-        String buildFileContent = "buildscript {\n" +
-            "    repositories {\n" +
-            "        mavenCentral()\n" +
-            "    }\n" +
-            "}\n" +
-            "\n" +
-            "plugins {\n" +
-            "    id 'java'\n" +
-            "    id 'biz.lermitage.oga'\n" +
-            "}\n" +
-            "\n" +
-            "dependencies {\n" +
-            "    implementation 'org.bouncycastle:bcprov-jdk15:140'\n" +
-            "    implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:5.0.2'\n" +
-            "    testRuntimeOnly 'junit:junit:4.12'\n" +
-            "}\n" +
-            "\n" +
-            "repositories {\n" +
-            "    mavenCentral()\n" +
-            "}\n";
-
-        writeFile(buildFile, buildFileContent);
+        writeFile(buildFile, getFileContentFromResources("build-OK.gradle"));
 
         BuildResult result = GradleRunner.create()
             .withProjectDir(testProjectDir.getRoot())
@@ -102,28 +79,7 @@ public abstract class AbstractOgaCheckTaskPluginTest {
     }
 
     protected void internalTestOgaCheckTaskKo(String gradleVersion) throws IOException {
-        String buildFileContent = "buildscript {\n" +
-            "    repositories {\n" +
-            "        mavenCentral()\n" +
-            "    }\n" +
-            "}\n" +
-            "\n" +
-            "plugins {\n" +
-            "    id 'java'\n" +
-            "    id 'biz.lermitage.oga'\n" +
-            "}\n" +
-            "\n" +
-            "dependencies {\n" +
-            "    implementation 'bouncycastle:bcprov-jdk15:140'\n" +
-            "    implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'\n" +
-            "    testRuntimeOnly 'junit:junit:4.12'\n" +
-            "}\n" +
-            "\n" +
-            "repositories {\n" +
-            "    mavenCentral()\n" +
-            "}\n";
-
-        writeFile(buildFile, buildFileContent);
+        writeFile(buildFile, getFileContentFromResources("build-KO.gradle"));
 
         BuildResult result = GradleRunner.create()
             .withProjectDir(testProjectDir.getRoot())
@@ -143,6 +99,15 @@ public abstract class AbstractOgaCheckTaskPluginTest {
     private void writeFile(File destination, String content) throws IOException {
         try (BufferedWriter output = new BufferedWriter(new FileWriter(destination))) {
             output.write(content);
+        }
+    }
+
+    private String getFileContentFromResources(String name) {
+        try {
+            URL resourceFileUrl = Objects.requireNonNull(getClass().getResource("/" + name));
+            return new String(Files.readAllBytes(Paths.get(resourceFileUrl.toURI())));
+        } catch (Exception e) {
+            throw new RuntimeException("failed to prepare test file '/" + name + "'", e);
         }
     }
 

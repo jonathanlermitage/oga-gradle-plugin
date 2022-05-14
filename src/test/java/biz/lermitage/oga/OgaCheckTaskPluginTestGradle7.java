@@ -4,7 +4,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class OgaCheckTaskPluginTest_Gradle7 extends AbstractOgaCheckTaskPluginTest {
+@SuppressWarnings("NewClassNamingConvention")
+public class OgaCheckTaskPluginTestGradle7 extends AbstractOgaCheckTaskPluginTest {
 
     @Test
     public void testOgaCheckTaskOkSimple() throws IOException {
