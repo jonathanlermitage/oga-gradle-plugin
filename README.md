@@ -13,7 +13,7 @@ A Gradle plugin that checks for deprecated *groupId + artifactId* couples, in or
 
 > [!NOTE]
 > Plugin v1.1.1 was tested with Gradle 4.10.3, 5.6.4, 6.9.1 and 7.3.1 on JDK8 and JDK11.  
-> Starting from plugin v2.0.0, it's tested with Gradle 8 an 9 on JDK21, and it is compatible with Gradle's configuration cache, which should be enabled by default in Gradle 10. Previous Gradle and Java versions are no longer supported.
+> Starting from plugin v2.0.0, it's tested with Gradle 8 and 9 on JDK21, and it is compatible with Gradle's configuration cache, which should be enabled by default in Gradle 10. Previous Gradle and Java versions are no longer supported.
 
 ## Author
 
