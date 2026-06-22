@@ -6,6 +6,7 @@ if [%1] == [help] (
   echo  b     : build
   echo  t     : test
   echo  pub   : publish plugin to https://plugins.gradle.org/plugin/biz.lermitage.oga
+  echo  publocal : install to local m2
 )
 
 if [%1] == [w] (
@@ -23,4 +24,7 @@ if [%1] == [t] (
 )
 if [%1] == [pub] (
   gradlew clean build testClasses check publishPlugins --warning-mode all --info --parallel
+)
+if [%1] == [publocal] (
+  gradlew clean build publishToMavenLocal
 )

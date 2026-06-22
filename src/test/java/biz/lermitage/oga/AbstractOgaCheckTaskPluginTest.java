@@ -1,6 +1,5 @@
 package biz.lermitage.oga;
 
-import org.apache.commons.io.IOUtils;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.GradleRunner;
@@ -14,13 +13,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,10 +24,9 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings("WeakerAccess")
 public abstract class AbstractOgaCheckTaskPluginTest {
 
-    protected static final String GRADLE_4_VERSION = "4.10.3";
-    protected static final String GRADLE_5_VERSION = "5.6.4";
-    protected static final String GRADLE_6_VERSION = "6.9.1";
-    protected static final String GRADLE_7_VERSION = "7.4.2";
+    protected static final String GRADLE_8_14_VERSION = "8.14.3";
+    protected static final String GRADLE_9_5_VERSION = "9.5.0";
+    protected static final String GRADLE_9_6_VERSION = "9.6.0";
 
     @Rule
     public final TemporaryFolder testProjectDir = new TemporaryFolder();
@@ -50,7 +44,7 @@ public abstract class AbstractOgaCheckTaskPluginTest {
         BuildResult result = GradleRunner.create()
             .withProjectDir(testProjectDir.getRoot())
             .withArguments("biz-lermitage-oga-gradle-check", "--info", "--stacktrace")
-            .withPluginClasspath(getPluginClasspathFiles())
+            .withPluginClasspath()
             .withGradleVersion(gradleVersion)
             .build();
 
@@ -67,7 +61,7 @@ public abstract class AbstractOgaCheckTaskPluginTest {
         BuildResult result = GradleRunner.create()
             .withProjectDir(testProjectDir.getRoot())
             .withArguments("biz-lermitage-oga-gradle-check", "--info", "--stacktrace")
-            .withPluginClasspath(getPluginClasspathFiles())
+            .withPluginClasspath()
             .withGradleVersion(gradleVersion)
             .build();
 
@@ -84,7 +78,7 @@ public abstract class AbstractOgaCheckTaskPluginTest {
         BuildResult result = GradleRunner.create()
             .withProjectDir(testProjectDir.getRoot())
             .withArguments("biz-lermitage-oga-gradle-check", "--info", "--stacktrace")
-            .withPluginClasspath(getPluginClasspathFiles())
+            .withPluginClasspath()
             .withGradleVersion(gradleVersion)
             .buildAndFail();
 
@@ -111,11 +105,4 @@ public abstract class AbstractOgaCheckTaskPluginTest {
         }
     }
 
-    private List<File> getPluginClasspathFiles() throws IOException {
-        URL pluginClasspathResource = getClass().getClassLoader().getResource("plugin-classpath.txt");
-        assertNotNull("did not find plugin classpath resource, run `testClasses` build task", pluginClasspathResource);
-
-        String pluginClasspathStr = IOUtils.toString(pluginClasspathResource, StandardCharsets.UTF_8);
-        return Arrays.stream(pluginClasspathStr.split("\n")).map(File::new).collect(Collectors.toList());
-    }
 }

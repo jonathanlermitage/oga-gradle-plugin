@@ -1,8 +1,10 @@
 ## Old GroupIds Alerter - Change Log
 
-### WIP
-* migrate code to Kotlin then reuse code from the OGA Maven plugin (because it's already written in Kotlin)
-* duplicate most of the OGA Maven plugin features
+### 2.0.0 (2026/06/22)
+* migrate to Gradle 8 and Java 21. Test with Gradle 8 and 9.
+* make the plugin compatible with Gradle's configuration cache, which may be enabled by default in Gradle 10.
+* minor code reworks.
+* a future update may provide feature parity with the original Maven plugin.
 
 ### 1.1.1 (2021/12/07)
 * build the plugin with Gradle 7.3.1. It should be compatible with Gradle from 4.10 to 7+.
