@@ -24,27 +24,10 @@ Linkedin profile: [jonathan-lermitage-092711142](https://www.linkedin.com/in/jon
 
 Using the plugins DSL:
 
-```groovy
+```kotlin
 plugins {
-  id "biz.lermitage.oga" version "2.0.0"
+  id("biz.lermitage.oga") version "2.0.0"
 }
-```
-
-Otherwise, using legacy plugin application:
-
-```groovy
-buildscript {
-  repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
-  }
-  dependencies {
-    classpath "gradle.plugin.biz.lermitage.oga:oga-gradle-plugin:2.0.0"
-  }
-}
-
-apply plugin: "biz.lermitage.oga"
 ```
 
 Then launch `./gradlew biz-lermitage-oga-gradle-check`. If any deprecated *groupId + artifactId* couple is found, error message(s) will be displayed and the Gradle build will fail.
