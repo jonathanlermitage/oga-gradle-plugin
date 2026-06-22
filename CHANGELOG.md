@@ -1,7 +1,7 @@
 ## Old GroupIds Alerter - Change Log
 
 ### 2.0.0 (2026/06/22)
-* migrate to Gradle 8 and Java 21. Test with Gradle 8 and 9.
+* migrate to Gradle 9 and Java 21. Test with Gradle 8 and 9.
 * make the plugin compatible with Gradle's configuration cache, which may be enabled by default in Gradle 10.
 * minor code reworks.
 * a future update may provide feature parity with the original Maven plugin.
