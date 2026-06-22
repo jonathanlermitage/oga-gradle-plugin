@@ -61,7 +61,7 @@ See [plugins.gradle.org/plugin/biz.lermitage.oga](https://plugins.gradle.org/plu
 
 ### Code 
 
-Open an issue or a pull-request. Contributions must be tested at least on JDK8.  
+Open an issue or a pull-request. Contributions must be tested.  
 Please reformat new code only: do not reformat the whole project or entire existing file (in other words, try do limit the amount of changes in order to speed up code review).
 
 ### Definitions file
