@@ -17,11 +17,16 @@ public class OgaCheckPlugin implements Plugin<Project> {
             task.getDependencies().set(project.provider(() -> {
                 Set<String> dependencies = new HashSet<>();
                 for (Configuration config : project.getConfigurations()) {
-                    config.getAllDependencies().forEach(dep -> {
-                        if (dep.getGroup() != null && !dep.getName().equals("unspecified")) {
-                            dependencies.add(dep.getGroup() + ":" + dep.getName());
-                        }
-                    });
+                    try {
+                        config.getAllDependencies().forEach(dep -> {
+                            if (dep.getGroup() != null && !dep.getName().equals("unspecified")) {
+                                dependencies.add(dep.getGroup() + ":" + dep.getName());
+                            }
+                        });
+                    } catch (Exception e) {
+                        project.getLogger().warn("Error while retrieving dependencies for config: {} - Skipping. The error message was: {}",
+                            config.getName(), e.getMessage());
+                    }
                 }
                 return dependencies;
             }));
