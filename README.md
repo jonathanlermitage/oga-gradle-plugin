@@ -26,7 +26,7 @@ Using the plugins DSL:
 
 ```kotlin
 plugins {
-  id("biz.lermitage.oga") version "2.0.0"
+  id("biz.lermitage.oga") version "2.0.1"
 }
 ```
 
