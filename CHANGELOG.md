@@ -1,7 +1,7 @@
 ## Old GroupIds Alerter - Change Log
 
 ### 2.0.1 (2026/06/27)
-* don't fail if failed to get the dependencies of a Gradle configuration. Log the error, then continue with the next configuration.
+* don't stop if failed to get the dependencies of a Gradle configuration. Log the error, then continue with the next configuration.
 
 ### 2.0.0 (2026/06/22)
 * migrate to Gradle 9 and Java 21. Test with Gradle 8 and 9.
